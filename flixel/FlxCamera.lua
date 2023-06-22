@@ -1,0 +1,1 @@
+FlxCamera = FlxBasic:extend()

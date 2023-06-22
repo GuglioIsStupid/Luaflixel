@@ -1,6 +1,5 @@
 function love.load()
     require "modules.overrides"
-    print(table.indexOf)
     class = require 'libs.classic'
     require "openfl"
     require "flixel"
@@ -8,7 +7,7 @@ function love.load()
     require "states.menu"
 
     -- switch to the menu state
-    FlxG.game = class:new()
+    FlxG:init("LuaFlixel Tests", 1280, 720)
     
     FlxG:switchState(menu)
 end
@@ -18,5 +17,5 @@ function love.update(dt)
 end
 
 function love.draw()
-
+    FlxG:draw()
 end

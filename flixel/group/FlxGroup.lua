@@ -102,14 +102,11 @@ function FlxGroup:draw()
     if (self.cameras ~= nil) then
         FlxCamera._defaultCameras = self.cameras
     end
-
-    while (i < self.length) do
+    for i = 0, #self.members do
         basic = self.members[i]
-
         if (basic ~= nil and basic.exists and basic.visible) then
             basic:draw()
         end
-        i = i + 1
     end
 end
 
@@ -148,7 +145,6 @@ function FlxGroup:add(Object)
     if (self._memberAdded ~= nil) then
         self._memberAdded:dispatch(Object)
     end
-
     return Object
 end
 

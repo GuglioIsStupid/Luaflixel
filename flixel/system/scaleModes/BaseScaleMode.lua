@@ -3,7 +3,7 @@ BaseScaleMode = class:extend()
 BaseScaleMode.deviceSize = nil
 BaseScaleMode.gameSize = nil
 BaseScaleMode.scale = nil
-BaseScaleMode.offset = nil
+BaseScaleMode.offset = FlxPoint()
 
 BaseScaleMode.horizontalAlign = CENTER
 BaseScaleMode.verticalAlign = CENTER
@@ -13,31 +13,29 @@ function BaseScaleMode:new()
     self.gameSize = FlxPoint:get()
     self.scale = FlxPoint:get()
     self.offset = FlxPoint:get()
+
+    return self
 end
 
 function BaseScaleMode:onMeasure(w,h)
     FlxG.width = FlxG.initialWidth
     FlxG.height = FlxG.initialHeight
 
-    self.updateGameSize(w, h)
-    self.updateDeviceSize(w, h)
-    self.updateScaleOffset()
-    self.updateGamePosition()
+    self:updateGameSize(w, h)
+    self:updateDeviceSize(w, h)
+    self:updateScaleOffset()
+    self:updateGamePosition()
 end
 
 function BaseScaleMode:updateGameSize(w,h)
-    self.gameSize:set(w,h)
 end
 
 function BaseScaleMode:updateDeviceSize(w,h)
-    self.deviceSize:set(w,h)
 end
 
 function BaseScaleMode:updateScaleOffset()
-    self.scale.x = self.gameSize.x / FlxG.width
-    self.scale.y = self.gameSize.y / FlxG.height
-    self:updateOffsetX()
-    self:updateOffsetY()
+    --self:updateOffsetX()
+    --self:updateOffsetY()
 end
 
 function BaseScaleMode:updateOffsetX()

@@ -50,7 +50,7 @@ FlxG.sound = SoundFrontEnd:new()
 --FlxG.signals = SignalFrontEnd:new()
 
 function FlxG:resizeGame(w,h)
-    self.scaleMode.onMeasure(w,h)
+    self.scaleMode:onMeasure(w,h)
 end
 
 function FlxG:resizeWindow(w, h)
@@ -84,8 +84,7 @@ function FlxG:update(elapsed)
     self.state:tryUpdate(elapsed)
 end
 
-function FlxG:init(Game, w, h)
-    self.game = Game
+function FlxG:init(title, w, h)
     self.width = math.floor(math.abs(w))
     self.height = math.floor(math.abs(h))
 
@@ -93,4 +92,11 @@ function FlxG:init(Game, w, h)
     FlxG.initialHeight = h
 
     self:resizeGame(w, h)
+
+    love.window.setMode(w, h, {resizable = true, vsync = true, minwidth = 320, minheight = 240})
+    love.window.setTitle(title)
 end
+
+function FlxG:draw()
+    self.state:draw()
+end 

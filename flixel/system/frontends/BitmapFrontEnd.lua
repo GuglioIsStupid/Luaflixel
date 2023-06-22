@@ -5,6 +5,7 @@ BitmapFrontEnd.maxTextureSize = nil
 BitmapFrontEnd.whitePixel = nil
 BitmapFrontEnd._cache = {
     keys = function() return {} end,
+    set = function() end,
 }
 BitmapFrontEnd._lastUniqueKeyIndex = 0
 
@@ -60,17 +61,11 @@ function BitmapFrontEnd:create(w,h,color,unique,key)
 end
 
 function BitmapFrontEnd:add(Graphic, Unique, Key)
-    if Graphic.type == "FlxGraphic" then
-        return FlxGraphic.fromGraphic(Graphic, Unique, Key)
-    elseif Graphic.type == "BitmapData" then
-        return FlxGraphic.fromBitmapData(Graphic, Unique, Key)
-    end
-
-    return FlxGraphic.fromAssetKey(tostring(Graphic), Unique, Key)
+    return FlxGraphic:fromGraphic(Graphic, Unique, Key)
 end
 
 function BitmapFrontEnd:addGraphic(graphic)
-    self._cache.set(graphic.key, graphic)
+    BitmapFrontEnd._cache.set(graphic.key, graphic)
     return graphic
 end
 
