@@ -295,6 +295,16 @@ function FlxObject:updateTouchingFlagsY(object1, object2)
     return FlxObject:computeOverlapY(object1, object2, true) ~= 0
 end
 
+function FlxObject:getScreenPosition(camera)
+    local tx, ty = 0, 0
+    if camera then
+        tx, ty = camera:getPosition(0,0)
+        tx = tx * self.scrollFactor.x
+        ty = ty * self.scrollFactor.y
+    end
+    return self.x + tx, self.y + ty
+end
+
 FlxObject.x = 0
 FlxObject.y = 0
 FlxObject.width = 0
@@ -375,14 +385,14 @@ function FlxObject:destroy()
 end
 
 function FlxObject:update(elapsed)
-    self.last.set(self.x, self.y)
+    --self.last.set(self.x, self.y)
 
     if (self.path ~= nil and self.path.active) then
         self.path:update(elapsed)
     end
 
     if self.moves then
-        self:updateMotion(elapsed)
+        --self:updateMotion(elapsed)
     end
 
     self.wasTouching = self.touching    

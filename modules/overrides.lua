@@ -19,3 +19,7 @@ function table.splice(table, index, count)
     end
     return result
 end
+
+function string.startsWith(str, start)
+    return str:sub(1, #start) == start
+end

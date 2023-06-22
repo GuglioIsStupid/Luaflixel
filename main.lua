@@ -1,6 +1,7 @@
 function love.load()
     require "modules.overrides"
     class = require 'libs.classic'
+    parseXml = require 'libs.xmlparser'
     require "openfl"
     require "flixel"
 
