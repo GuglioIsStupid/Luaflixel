@@ -23,3 +23,7 @@ end
 function string.startsWith(str, start)
     return str:sub(1, #start) == start
 end
+
+function table.set(table, index, value)
+    table[index] = value
+end

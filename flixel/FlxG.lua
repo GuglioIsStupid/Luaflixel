@@ -43,6 +43,8 @@ FlxG.inputs = InputFrontEnd:new()
 FlxG.bitmap = BitmapFrontEnd:new()
 FlxG.cameras = CameraFrontEnd:new()
 
+FlxG.keys = FlxKeyboard:new()
+
 FlxG.initialWidth = 0
 FlxG.initialHeight = 0
 
@@ -71,7 +73,6 @@ function FlxG:switchState(nextState)
             if (self.state == stateOnCall) then
                 self.state:create()
             else
-                print("[WARNING] `onOutroComplete` was called after the state was switched. This will be ignored")
                 self.state:create()
             end
         end
