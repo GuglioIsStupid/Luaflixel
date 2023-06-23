@@ -43,7 +43,7 @@ FlxG.inputs = InputFrontEnd:new()
 FlxG.bitmap = BitmapFrontEnd:new()
 FlxG.cameras = CameraFrontEnd:new()
 
-FlxG.keys = FlxKeyboard:new()
+FlxG.keys = nil--FlxKeyboard:new()
 
 FlxG.initialWidth = 0
 FlxG.initialHeight = 0

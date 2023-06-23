@@ -167,7 +167,6 @@ end
 
 function FlxSprite:update(elapsed)
     self.super:update(elapsed)
-
     self.animation:update(elapsed)
 end
 

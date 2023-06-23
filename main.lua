@@ -20,5 +20,7 @@ end
 function love.draw()
     FlxG:draw()
     -- print lua memory usage (in mb)
-    love.graphics.print("Lua Memory: " .. collectgarbage("count") / 1024 .. "mb", 10, 10)
+    love.graphics.print("Lua Memory: " .. collectgarbage("count") / 1024 .. "mb" .. 
+    "\nGraphics Memory: " .. math.floor(love.graphics.getStats().texturememory / 1048576) .. "mb" ..
+    "\nImages Loaded: " .. love.graphics.getStats().images, 0, 0)
 end

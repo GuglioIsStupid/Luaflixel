@@ -81,16 +81,15 @@ function FlxGroup:destroy()
 end
 
 function FlxGroup:update(elapsed)
+    print("FlxGroup:update()", elapsed)
     local i = 0
     local basic = nil
 
-    while (i < self.length) do
+    for i = 0, #self.members do
         basic = self.members[i]
-
-        if (basic ~= nil and basic.exists and basic.active) then
+        if (basic ~= nil and basic.exists and basic.visible) then
             basic:update(elapsed)
         end
-        i = i + 1
     end
 end
 

@@ -99,6 +99,7 @@ function FlxState:onFocus() end
 function FlxState:onResize(w, h) end
 
 function FlxState:tryUpdate(elapsed)
+    self.super.update(self, elapsed)
     if (self.persistentUpdate or self.substate == nil) then
         self:update(elapsed)
     end
