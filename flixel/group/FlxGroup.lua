@@ -46,7 +46,7 @@ FlxGroup._memberRemoved = nil
 
 FlxGroup._marker = 0
 
-function FlxGroup:new(MaxSize)
+function FlxGroup.new(MaxSize)
     local MaxSize = MaxSize or 0
     self.super.new()
 

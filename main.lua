@@ -19,9 +19,31 @@ end
 
 function love.keypressed(key)
     if key == "-" then
+        if FlxG.sound.muted then
+            FlxG.sound.volume = FlxG.sound.lastVolume
+            FlxG.sound.muted = false
+        end
         FlxG.sound.volume = FlxG.sound.volume - 0.1
+        FlxG.soundTray:show(false)
+    elseif key == "=" then
+        if FlxG.sound.muted then
+            FlxG.sound.volume = FlxG.sound.lastVolume
+            FlxG.sound.muted = false
+        end
+        FlxG.sound.volume = FlxG.sound.volume + 0.1
+        FlxG.soundTray:show(true)
+    elseif key == "0" then
+        if not FlxG.sound.muted then
+            FlxG.sound.lastVolume = FlxG.sound.volume
+            FlxG.sound.volume = 0
+            FlxG.sound.muted = true
+        else
+            FlxG.sound.volume = FlxG.sound.lastVolume
+            FlxG.sound.muted = false
+        end
+        FlxG.soundTray:show(FlxG.sound.muted)
     end
-    FlxG.soundTray:show(true)
+    
 end
 
 function love.draw()

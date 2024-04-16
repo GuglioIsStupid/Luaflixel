@@ -251,6 +251,8 @@ function FlxSprite:draw()
         love.graphics.rectangle("fill", -ox, -oy, self.width, self.height)
         love.graphics.pop()
     end
+
+    love.graphics.setColor(255, 255, 255, 255)
 end
 
 function FlxSprite:play(AnimName, Force, Reversed, Frame)
