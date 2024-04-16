@@ -33,6 +33,7 @@ FlxSprite.blend = "normal"
 FlxSprite.color = 0xffffff
 FlxSprite.colorTransform = nil
 FlxSprite.useColorTransform = false
+FlxSprite.isGraphic = false
 
 -- function to convert the colour to rgb
 local function toRGB(color)
@@ -118,6 +119,18 @@ function FlxSprite:loadGraphic(graphic, animated, frameWidth, frameHeight, uniqu
     return self
 end
 
+function FlxSprite:makeGraphic(width, height, colour)
+    self.graphic = {bitmap = nil}
+    self.width = width
+    self.height = height
+    self.frameWidth = width
+    self.frameHeight = height
+    self.frames = nil
+    self.color = colour
+    self.isGraphic = true
+    return self
+end
+
 function FlxSprite:getSparrowAtlas(atlas)
     return FlxAnimationController:getFramesFromSparrow(self.graphic, love.filesystem.read(atlas))
 end
@@ -167,11 +180,21 @@ end
 
 function FlxSprite:update(elapsed)
     self.super:update(elapsed)
-    self.animation:update(elapsed)
+    if not self.isGraphic then self.animation:update(elapsed) end
+end
+
+function FlxSprite:screenCenter(XY) 
+    local XY = XY or "XY"
+    if string.find(XY, "X") then
+        self.x = (FlxG.width - self.width) / 2
+    end
+    if string.find(XY, "Y") then
+        self.y = (FlxG.height - self.height) / 2
+    end
 end
 
 function FlxSprite:draw()
-    if self.exists and self.alive and self.graphic.bitmap and (self.alpha > 0 or self.scale.x > 0 or self.scale.y > 0) then
+    if self.exists and self.alive and self.graphic.bitmap and (self.alpha > 0 or self.scale.x > 0 or self.scale.y > 0) and not self.isGraphic then
         local cam = self:getCamera() or FlxG.camera
         local x, y = self:getScreenPosition(cam)
         local r = math.rad(self.angle)
@@ -202,6 +225,31 @@ function FlxSprite:draw()
         else
             love.graphics.draw(self.graphic.bitmap, frame.quad, x, y, r, sx, sy, ox, oy, kx, ky)
         end
+    elseif self.exists and self.visible and self.isGraphic then
+        -- draw a rectangle with self.width and self.height 
+        local cam = self:getCamera() or FlxG.camera
+        local x, y = self:getScreenPosition(cam)
+        local sx, sy = self.scale.x, self.scale.y
+        local ox, oy = self.origin.x, self.origin.y
+        local kx, ky = self.shear.x, self.shear.y
+
+        local colorR, colorB, colorG = toRGB(self.color)
+        love.graphics.setColor(colorR, colorB, colorG, self.alpha)
+
+        -- antialiasing is not needed
+
+        if self.flipX then sx = -sx end
+        if self.flipY then sy = -sy end
+
+        x = x + ox - self.offset.x
+        y = y + oy - self.offset.y
+
+        love.graphics.push()
+        love.graphics.translate(x, y)
+        love.graphics.rotate(math.rad(self.angle))
+        love.graphics.scale(sx, sy)
+        love.graphics.rectangle("fill", -ox, -oy, self.width, self.height)
+        love.graphics.pop()
     end
 end
 

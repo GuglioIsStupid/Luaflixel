@@ -12,6 +12,7 @@ FlxKeys = {
     ZERO = "0",
     NUMPADZERO = "num0"
 }
+
 require (path .. "util.FlxDestroy")
 require (path .. "FlxBasic")
 require (path .. "FlxCamera")
@@ -48,5 +49,6 @@ require (path .. "FlxState")
 require (path .. "system.FlxVersion")
 require (path .. "system.scaleModes.BaseScaleMode")
 require (path .. "system.scaleModes.RatioScaleMode")
+require (path .. "system.ui.FlxSoundTray")
 
 require (path .. "FlxG")

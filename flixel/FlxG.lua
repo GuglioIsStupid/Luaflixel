@@ -8,7 +8,7 @@ FlxG.camera = nil
 
 FlxG.VERSION = FlxVersion(1, 0, 0)
 
-FlxG.game = nil
+FlxG.game = {x=0, y=0}
 FlxG.stage = nil
 FlxG.state = nil
 
@@ -49,6 +49,7 @@ FlxG.initialWidth = 0
 FlxG.initialHeight = 0
 
 FlxG.sound = SoundFrontEnd:new()
+FlxG.soundTray = FlxSoundTray
 --FlxG.signals = SignalFrontEnd:new()
 
 function FlxG:resizeGame(w,h)
@@ -56,7 +57,7 @@ function FlxG:resizeGame(w,h)
 end
 
 function FlxG:resizeWindow(w, h)
-    self.stage:resize(w, h)
+    --self.stage:resize(w, h)
     self.width = w
     self.height = h
 end
@@ -83,14 +84,17 @@ function FlxG:update(elapsed)
     self.elapsed = elapsed
     self.inputs:update()
     self.state:tryUpdate(elapsed)
+    self.soundTray:update(elapsed)
 end
 
 function FlxG:init(title, w, h)
-    self.width = math.floor(math.abs(w))
-    self.height = math.floor(math.abs(h))
+    FlxG.width = math.floor(math.abs(w))
+    FlxG.height = math.floor(math.abs(h))
 
     FlxG.initialWidth = w
     FlxG.initialHeight = h
+
+    FlxG.soundTray = FlxSoundTray:new()
 
     self:resizeGame(w, h)
 

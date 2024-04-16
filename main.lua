@@ -17,6 +17,13 @@ function love.update(dt)
     FlxG:update(dt)
 end
 
+function love.keypressed(key)
+    if key == "-" then
+        FlxG.sound.volume = FlxG.sound.volume - 0.1
+    end
+    FlxG.soundTray:show(true)
+end
+
 function love.draw()
     FlxG:draw()
     -- print lua memory usage (in mb)

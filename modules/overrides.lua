@@ -27,3 +27,7 @@ end
 function table.set(table, index, value)
     table[index] = value
 end
+
+function math.round(num)
+    return math.floor(num + 0.5)
+end

@@ -54,6 +54,8 @@ function FlxGroup:new(MaxSize)
     self.maxSize = math.floor(math.abs(MaxSize))
     self.flixelType = GROUP
 
+    self.visible = true
+
     return self
 end
 
@@ -81,7 +83,6 @@ function FlxGroup:destroy()
 end
 
 function FlxGroup:update(elapsed)
-    print("FlxGroup:update()", elapsed)
     local i = 0
     local basic = nil
 
@@ -94,6 +95,7 @@ function FlxGroup:update(elapsed)
 end
 
 function FlxGroup:draw()
+    if not self.visible then return false end
     local i = 0
     local basic = nil
 
